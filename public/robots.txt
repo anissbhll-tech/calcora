@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*?*preview=
+
+# Crawl Delay
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://calcora.com/sitemap.xml
