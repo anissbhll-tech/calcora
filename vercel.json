@@ -19,6 +19,18 @@
       "dest": "/server.ts"
     },
     {
+      "src": "/ads.txt",
+      "dest": "/dist/ads.txt"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/dist/robots.txt"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "/dist/sitemap.xml"
+    },
+    {
       "src": "/(.*)",
       "dest": "/dist/$1"
     }

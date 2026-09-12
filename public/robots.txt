@@ -7,4 +7,4 @@ Disallow: /*?*preview=
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://calcora.com/sitemap.xml
+Sitemap: https://calcora-2a4.pages.dev/sitemap.xml

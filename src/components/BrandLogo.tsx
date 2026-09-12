@@ -24,7 +24,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   return (
     <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
       {/* Brand Icon Badge */}
-      <div className={`${box} bg-gradient-to-br from-teal-500 via-teal-600 to-emerald-700 rounded-xl shadow-xs flex items-center justify-center text-white ring-1 ring-white/20 transition-transform group-hover:scale-105 shrink-0`}>
+      <div className={`${box} bg-gradient-to-br from-indigo-500 via-indigo-600 to-violet-700 rounded-xl shadow-xs flex items-center justify-center text-white ring-1 ring-white/20 transition-transform group-hover:scale-105 shrink-0 shadow-indigo-500/20`}>
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -36,12 +36,12 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         >
           {/* Calculator Grid Symbol + Math Synergy Accent */}
           <rect x="4" y="3" width="16" height="18" rx="3" className="stroke-white" />
-          <line x1="8" y1="7" x2="16" y2="7" className="stroke-teal-200" strokeWidth="2" />
+          <line x1="8" y1="7" x2="16" y2="7" className="stroke-indigo-200" strokeWidth="2" />
           <circle cx="8" cy="11" r="1" fill="currentColor" />
           <circle cx="12" cy="11" r="1" fill="currentColor" />
           <circle cx="16" cy="11" r="1" fill="currentColor" />
           <circle cx="8" cy="15" r="1" fill="currentColor" />
-          <line x1="12" y1="15" x2="16" y2="15" strokeWidth="2" className="stroke-teal-100" />
+          <line x1="12" y1="15" x2="16" y2="15" strokeWidth="2" className="stroke-indigo-100" />
         </svg>
       </div>
 
@@ -52,10 +52,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
             <span className={`${text} font-black tracking-tight text-slate-900 dark:text-white font-sans`}>
               Calcora
             </span>
-            <span className={`${dot} rounded-full bg-teal-500 animate-pulse`} />
+            <span className={`${dot} rounded-full bg-indigo-500 animate-pulse`} />
           </div>
         </div>
       )}
     </div>
   );
 };
+

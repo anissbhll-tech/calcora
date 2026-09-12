@@ -1,1 +1,9 @@
-/*    /index.html   200
+/ads.txt        /ads.txt        200
+/robots.txt     /robots.txt     200
+/sitemap.xml    /sitemap.xml    200
+/site.webmanifest /site.webmanifest 200
+/favicon.svg    /favicon.svg    200
+/logo.svg       /logo.svg       200
+/og-image.svg   /og-image.svg   200
+/apple-touch-icon.svg /apple-touch-icon.svg 200
+/*              /index.html     200

@@ -186,6 +186,7 @@ export const trackPageView = (path: string, title?: string): void => {
   sendGa4Event('page_view', {
     page_path: path,
     page_title: title || (typeof document !== 'undefined' ? document.title : ''),
+    page_location: typeof window !== 'undefined' ? window.location.href : '',
   });
 
   trackEvent('pageview', title || 'Page View', path);

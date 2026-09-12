@@ -135,14 +135,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       >
         {/* Search Input Bar */}
         <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3 bg-slate-50/50 dark:bg-slate-900/50">
-          <Search className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0" />
+          <Search className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search calculators (e.g., mortgage, bmi, percentage, concrete)..."
-            className="w-full bg-transparent text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-base focus:outline-none"
+            placeholder="What do you want to calculate? (e.g. mortgage, BMI, concrete, compound interest)..."
+            className="w-full bg-transparent text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-base focus:outline-none font-medium"
             aria-label="Search calculators"
           />
           {query && (
@@ -168,13 +168,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {!query && recentSearches.length > 0 && (
           <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-950/40 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
             <span className="text-slate-400 font-medium shrink-0 flex items-center gap-1">
-              <History className="w-3 h-3 text-teal-600 dark:text-teal-400" /> Recent:
+              <History className="w-3 h-3 text-indigo-600 dark:text-indigo-400" /> Recent:
             </span>
             {recentSearches.map((term, i) => (
               <span
                 key={i}
                 onClick={() => setQuery(term)}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-teal-500 cursor-pointer shrink-0 transition"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-indigo-500 cursor-pointer shrink-0 transition"
               >
                 <span>{term}</span>
                 <X
@@ -194,7 +194,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             onClick={() => setSelectedCategoryFilter('all')}
             className={`px-2.5 py-1 rounded-full transition shrink-0 font-medium ${
               selectedCategoryFilter === 'all'
-                ? 'bg-teal-600 text-white shadow-xs'
+                ? 'bg-indigo-600 text-white shadow-xs'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
             }`}
           >
@@ -209,7 +209,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 onClick={() => setSelectedCategoryFilter(cat.id)}
                 className={`px-2.5 py-1 rounded-full transition shrink-0 font-medium ${
                   selectedCategoryFilter === cat.id
-                    ? 'bg-teal-600 text-white shadow-xs'
+                    ? 'bg-indigo-600 text-white shadow-xs'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >
@@ -234,7 +234,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     key={idx}
                     type="button"
                     onClick={() => setQuery(suggested)}
-                    className="px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/80 dark:border-teal-800 text-xs font-medium hover:bg-teal-100 transition"
+                    className="px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800 text-xs font-medium hover:bg-indigo-100 transition"
                   >
                     {suggested}
                   </button>
@@ -257,15 +257,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   onMouseEnter={() => setSelectedIndex(index)}
                   className={`w-full text-left p-3 rounded-xl transition group flex items-center justify-between border ${
                     isSelected
-                      ? 'bg-teal-50/90 dark:bg-slate-800 border-teal-300 dark:border-teal-500/60 shadow-xs'
+                      ? 'bg-indigo-50/90 dark:bg-slate-800 border-indigo-300 dark:border-indigo-500/60 shadow-xs'
                       : 'border-transparent hover:bg-slate-50 dark:hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-transform ${
                       isSelected
-                        ? 'bg-teal-600 text-white scale-105'
-                        : 'bg-teal-100/70 dark:bg-slate-800 text-teal-600 dark:text-teal-400'
+                        ? 'bg-indigo-600 text-white scale-105'
+                        : 'bg-indigo-100/70 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400'
                     }`}>
                       <Calculator className="w-5 h-5" />
                     </div>
@@ -273,8 +273,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       <div className="flex items-center gap-2">
                         <span className={`font-semibold text-sm transition-colors ${
                           isSelected
-                            ? 'text-teal-700 dark:text-teal-300 font-bold'
-                            : 'text-slate-900 dark:text-slate-100 group-hover:text-teal-600 dark:group-hover:text-teal-400'
+                            ? 'text-indigo-700 dark:text-indigo-300 font-bold'
+                            : 'text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'
                         }`}>
                           {highlightMatch(calc.title, query)}
                         </span>
@@ -296,11 +296,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       </span>
                     )}
                     {isSelected ? (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-teal-600 dark:text-teal-400">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-600 dark:text-indigo-400">
                         Press <CornerDownLeft className="w-3 h-3" />
                       </span>
                     ) : (
-                      <ArrowRight className="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-teal-600 dark:group-hover:text-teal-400 group-hover:translate-x-0.5 transition" />
+                      <ArrowRight className="w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 group-hover:translate-x-0.5 transition" />
                     )}
                   </div>
                 </button>
@@ -318,7 +318,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             <span><kbd className="px-1 py-0.5 bg-slate-200 dark:bg-slate-800 rounded font-mono">ESC</kbd> Close</span>
           </span>
           <span className="flex sm:hidden items-center gap-1">
-            <Sparkles className="w-3.5 h-3.5 text-teal-500" /> Calcora Search
+            <Sparkles className="w-3.5 h-3.5 text-indigo-500" /> Calcora Command
           </span>
         </div>
       </div>

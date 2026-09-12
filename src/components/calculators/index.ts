@@ -51,6 +51,7 @@ import { FlooringSquareFootageCalculator } from './FlooringSquareFootageCalculat
 import { OvertimePayCalculator } from './OvertimePayCalculator';
 import { ReadingTimeWordCountCalculator } from './ReadingTimeWordCountCalculator';
 import { ConcreteFootingSlabCalculator } from './ConcreteFootingSlabCalculator';
+import { LumpSumVsDcaCalculator } from './LumpSumVsDcaCalculator';
 
 // 48 New Calculators
 import { RentalPropertyRoiCalculator } from './RentalPropertyRoiCalculator';
@@ -99,6 +100,21 @@ import { TimeCardWorkHoursCalculator } from './TimeCardWorkHoursCalculator';
 import { SinkingFundCalculator } from './SinkingFundCalculator';
 import { BloodPressureCategoryCalculator } from './BloodPressureCategoryCalculator';
 import { ReadingTimeCalculator } from './ReadingTimeCalculator';
+import { FederalIncomeTaxBracketCalculator } from './FederalIncomeTaxBracketCalculator';
+import { FireNumberCalculator } from './FireNumberCalculator';
+import { RothVsTraditionalCalculator } from './RothVsTraditionalCalculator';
+import { SelfEmploymentTaxCalculator } from './SelfEmploymentTaxCalculator';
+import { CapitalGainsTaxCalculator } from './CapitalGainsTaxCalculator';
+import { AutoLeaseVsBuyCalculator } from './AutoLeaseVsBuyCalculator';
+import { StudentLoanIdrCalculator } from './StudentLoanIdrCalculator';
+import { BiweeklyMortgageCalculator } from './BiweeklyMortgageCalculator';
+import { KetoMacroCarbManagerCalculator } from './KetoMacroCarbManagerCalculator';
+import { BenchPressMaxCalculator } from './BenchPressMaxCalculator';
+import { StockDividendYieldCalculator } from './StockDividendYieldCalculator';
+import { DcaCalculator } from './DcaCalculator';
+import { DebtToIncomeAdvancedCalculator } from './DebtToIncomeAdvancedCalculator';
+import { Vo2MaxFitnessCalculator } from './Vo2MaxFitnessCalculator';
+import { MarathonRaceFinishCalculator } from './MarathonRaceFinishCalculator';
 
 export interface BaseCalculatorProps {
   onSaveHistory?: (summary: string, inputs: Record<string, any>, results: Record<string, any>) => void;
@@ -107,6 +123,21 @@ export interface BaseCalculatorProps {
 }
 
 export const CALCULATOR_COMPONENT_MAP: Record<string, React.FC<BaseCalculatorProps>> = {
+  'federal-income-tax-bracket': FederalIncomeTaxBracketCalculator as any,
+  'fire-number-calculator': FireNumberCalculator as any,
+  '401k-roth-ira-comparison': RothVsTraditionalCalculator as any,
+  'self-employment-tax-1099': SelfEmploymentTaxCalculator as any,
+  'capital-gains-tax-estimate': CapitalGainsTaxCalculator as any,
+  'auto-lease-vs-buy': AutoLeaseVsBuyCalculator as any,
+  'student-loan-income-driven-idr': StudentLoanIdrCalculator as any,
+  'biweekly-mortgage-payoff': BiweeklyMortgageCalculator as any,
+  'macro-keto-carb-manager': KetoMacroCarbManagerCalculator as any,
+  'bench-press-max-calculator': BenchPressMaxCalculator as any,
+  'stock-dividend-yield': StockDividendYieldCalculator as any,
+  'dca-crypto-stocks': DcaCalculator as any,
+  'debt-to-income-dti-advanced': DebtToIncomeAdvancedCalculator as any,
+  'vo2-max-fitness-score': Vo2MaxFitnessCalculator as any,
+  'marathon-race-finish-time': MarathonRaceFinishCalculator as any,
   'mortgage': MortgageCalculator,
   'compound-interest': CompoundInterestCalculator,
   'roi-margin': RoiCalculator,
@@ -159,6 +190,7 @@ export const CALCULATOR_COMPONENT_MAP: Record<string, React.FC<BaseCalculatorPro
   'overtime-pay': OvertimePayCalculator,
   'reading-time-word-count': ReadingTimeWordCountCalculator,
   'concrete-footing-slab': ConcreteFootingSlabCalculator,
+  'lump-sum-vs-dca': LumpSumVsDcaCalculator,
 
   // 48 New Calculators
   'rental-property-roi': RentalPropertyRoiCalculator,

@@ -50,17 +50,17 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
         }
       }}
       aria-label={`Open ${calculator.title} calculator`}
-      className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-500 hover:shadow-md dark:hover:border-teal-500/80 transition-all duration-200 text-left group cursor-pointer flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+      className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-indigo-500 hover:shadow-md dark:hover:border-indigo-500/80 transition-all duration-200 text-left group cursor-pointer flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 shadow-2xs"
     >
       <div>
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-200 shadow-2xs">
               <Calculator className="w-4 h-4" />
             </div>
             {calculator.isPopular && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 flex items-center gap-1 border border-amber-200/60 dark:border-amber-800">
-                <Star className="w-2.5 h-2.5 fill-current" /> Popular
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 flex items-center gap-1 border border-amber-200/80 dark:border-amber-800">
+                <Star className="w-2.5 h-2.5 fill-current text-amber-500" /> Popular
               </span>
             )}
           </div>
@@ -69,9 +69,9 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
             type="button"
             onClick={(e) => onToggleFavorite(calculator.id, e)}
             aria-label={isFavorite ? `Remove ${calculator.title} from favorites` : `Add ${calculator.title} to favorites`}
-            className={`p-2 rounded-xl transition-transform active:scale-125 ${
+            className={`min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl transition-all active:scale-110 ${
               isFavorite
-                ? 'text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/50'
+                ? 'text-rose-500 bg-rose-50/80 dark:bg-rose-950/50'
                 : 'text-slate-300 dark:text-slate-600 hover:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
             title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
@@ -80,15 +80,15 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
           </button>
         </div>
 
-        <h3 className="text-sm font-bold text-slate-800 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+        <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-1">
           {calculator.title}
         </h3>
 
-        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+        <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed min-h-[32px]">
           {calculator.shortDescription}
         </p>
 
-        <div className="flex items-center gap-2 mt-3 text-[10px]">
+        <div className="flex items-center gap-2 mt-3.5 text-[10px]">
           <span className={`px-2 py-0.5 rounded-md font-semibold border ${difficulty.color}`}>
             {difficulty.label}
           </span>
@@ -98,14 +98,14 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
         </div>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px]">
+      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px]">
         {category && (
-          <span className="text-slate-400 font-medium">
+          <span className="text-slate-500 dark:text-slate-400 font-medium truncate max-w-[130px]">
             {category.name}
           </span>
         )}
-        <span className="font-bold text-teal-600 dark:text-teal-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          Use Tool <ArrowRight className="w-3 h-3" />
+        <span className="font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform ml-auto">
+          Calculate <ArrowRight className="w-3 h-3" />
         </span>
       </div>
     </div>

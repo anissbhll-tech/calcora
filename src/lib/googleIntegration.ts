@@ -1,4 +1,5 @@
 import { GOOGLE_CONFIG } from '../config/google';
+import { initGA } from './analytics';
 
 declare global {
   interface Window {
@@ -27,25 +28,7 @@ export function initGoogleServices(): void {
   }
 
   // 2. Google Analytics 4 (GA4)
-  if (GOOGLE_CONFIG.gaMeasurementId) {
-    const existingScript = document.querySelector(`script[src*="googletagmanager.com/gtag/js"]`);
-    if (!existingScript) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_CONFIG.gaMeasurementId}`;
-      document.head.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () {
-        window.dataLayer.push(arguments);
-      };
-      window.gtag('js', new Date());
-      window.gtag('config', GOOGLE_CONFIG.gaMeasurementId, {
-        send_page_view: true,
-        anonymize_ip: true,
-      });
-    }
-  }
+  initGA();
 
   // 3. Google Tag Manager (GTM)
   if (GOOGLE_CONFIG.gtmContainerId) {
@@ -66,9 +49,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   if (GOOGLE_CONFIG.adsenseClientId) {
     const existingAdsense = document.querySelector(`script[src*="pagead2.googlesyndication.com"]`);
     if (!existingAdsense) {
+      const clientId = GOOGLE_CONFIG.adsenseClientId.startsWith('ca-')
+        ? GOOGLE_CONFIG.adsenseClientId
+        : `ca-${GOOGLE_CONFIG.adsenseClientId}`;
       const script = document.createElement('script');
       script.async = true;
-      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_CONFIG.adsenseClientId}`;
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
       script.crossOrigin = 'anonymous';
       document.head.appendChild(script);
     }

@@ -3,15 +3,75 @@ import { CATEGORIES } from './categories';
 import { CalculatorMeta, CategoryId } from '../types';
 
 /**
+ * Known Legacy Aliases, Alternative Slugs & Keyword Mappings
+ */
+export const CALCULATOR_ALIASES: Record<string, string> = {
+  // Legacy short / alternate names from earlier iterations
+  'probability': 'combination-permutation',
+  'z-score-p-value': 'standard-deviation-zscore',
+  'cooking-measurement-converter': 'cooking-unit-converter',
+  'currency-exchange': 'currency-fx-rate-converter',
+  'salary-hourly-converter': 'hourly-to-salary',
+  'fuel-cost-trip-estimator': 'fuel-trip',
+  'profit-margin-markup': 'markup-margin',
+  'ideal-weight': 'ideal-body-weight',
+  'bac': 'blood-alcohol-ebac',
+  'concrete-slab': 'concrete-slab-volume',
+  'rebar-weight': 'rebar-grid-spacing',
+  'sinking-fund-target': 'sinking-fund',
+  'bmi-calculator': 'bmi',
+  'tdee-calculator': 'calorie-tdee',
+  'mortgage-calculator': 'mortgage',
+  'compound-interest-calculator': 'compound-interest',
+  'auto-loan-calculator': 'auto-loan',
+  'credit-card-calculator': 'credit-card-payoff',
+  'loan-payoff': 'credit-card-payoff',
+  '401k': 'retirement-401k',
+  'sales-tax': 'sales-tax-tip',
+  'tip-calculator': 'tip-split-bill',
+  'gpa-calculator': 'gpa',
+  'bmr': 'bmr-calculator',
+  'tdee': 'calorie-tdee',
+  'ebac': 'blood-alcohol-ebac',
+  'macro-calculator': 'macro-nutrient',
+  'water-calculator': 'water-intake',
+  'heart-rate': 'target-heart-rate',
+  'options-pricing': 'option-greek-delta',
+  'black-scholes': 'option-greek-delta',
+  'va-loan': 'va-loan-funding-fee',
+  'pmi': 'pmi-removal-timeline',
+  'jumbo-loan': 'jumbo-mortgage-qualification',
+  'reverse-tax': 'sales-tax-reverse',
+  'reverse-vat': 'sales-tax-reverse',
+  'lump-sum-dca': 'lump-sum-vs-dca',
+};
+
+/**
  * Calcora Centralized Calculator Registry Manager
  */
 
 export function getCalculatorById(id: string): CalculatorMeta | undefined {
-  return CALCULATORS.find((calc) => calc.id === id || calc.slug === id);
+  if (!id) return undefined;
+  const canonicalId = CALCULATOR_ALIASES[id] || id;
+  return CALCULATORS.find(
+    (calc) =>
+      calc.id === canonicalId ||
+      calc.slug === canonicalId ||
+      calc.id === id ||
+      calc.slug === id
+  );
 }
 
 export function getCalculatorBySlug(slug: string): CalculatorMeta | undefined {
-  return CALCULATORS.find((calc) => calc.slug === slug || calc.id === slug);
+  if (!slug) return undefined;
+  const canonicalId = CALCULATOR_ALIASES[slug] || slug;
+  return CALCULATORS.find(
+    (calc) =>
+      calc.slug === canonicalId ||
+      calc.id === canonicalId ||
+      calc.slug === slug ||
+      calc.id === slug
+  );
 }
 
 export function getCalculatorsByCategory(categoryId: CategoryId): CalculatorMeta[] {

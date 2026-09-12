@@ -20,7 +20,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigateHome }) => {
             About <span className="text-teal-400">Calcora</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-            Calcora is a modern online mathematical and financial calculation suite engineered to deliver instant, accurate, and completely private results across 22 specialized domain tools.
+            Calcora is a modern online mathematical and financial calculation suite engineered to deliver instant, accurate, and completely private results across 154 verified calculation tools and 21 specialized domain categories.
           </p>
         </div>
       </header>
@@ -66,7 +66,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigateHome }) => {
       <section className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 space-y-4">
         <h2 className="text-xl font-bold text-slate-800 dark:text-white">What We Measure & Calculate</h2>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-          Calcora covers six primary domains with 22 dedicated calculators:
+          Calcora covers 21 specialized calculation domains spanning 154 dedicated tools:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-2">
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700">

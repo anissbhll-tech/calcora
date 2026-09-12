@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { CALCULATORS } from './data/calculatorsList';
 import { CATEGORIES } from './data/categories';
-import { BLOG_POSTS } from './data/blogPosts';
+import { BLOG_POSTS, getBlogPostBySlug } from './data/blogPosts';
+import { getCalculatorById } from './data/calculatorRegistry';
 import { CategoryId, CalculationHistoryItem, CalculatorMeta } from './types';
 import { getCalculatorComponent } from './components/calculators';
 import { updateSeoMetaData } from './lib/seo';
@@ -16,6 +17,7 @@ import { CategoryLandingView } from './components/CategoryLandingView';
 import { CalculatorWrapper } from './components/CalculatorWrapper';
 
 // Views
+import { CalculatorsDirectoryView } from './components/CalculatorsDirectoryView';
 import { BlogPage } from './components/BlogPage';
 import { BlogPostDetail } from './components/BlogPostDetail';
 import { AboutPage } from './components/AboutPage';
@@ -38,6 +40,7 @@ import { BackToTop } from './components/BackToTop';
 export default function App() {
   const [currentView, setCurrentView] = useState<
     | 'home'
+    | 'calculators'
     | 'category'
     | 'calculator'
     | 'blog'
@@ -157,10 +160,10 @@ export default function App() {
       }
 
       if (hash.startsWith('#calculator/')) {
-        const calcId = hash.replace('#calculator/', '');
-        const exists = CALCULATORS.some((c) => c.id === calcId);
-        if (exists) {
-          setSelectedCalculatorId(calcId);
+        const rawTarget = hash.replace('#calculator/', '');
+        const calc = getCalculatorById(rawTarget);
+        if (calc) {
+          setSelectedCalculatorId(calc.id);
           setCurrentView('calculator');
         }
       } else if (hash.startsWith('#category/')) {
@@ -170,11 +173,13 @@ export default function App() {
           setSelectedCategoryId(catId);
           setCurrentView('category');
         }
+      } else if (hash === '#calculators' || hash === '#all-calculators' || hash === '#directory') {
+        setCurrentView('calculators');
       } else if (hash.startsWith('#blog/')) {
-        const slug = hash.replace('#blog/', '');
-        const exists = BLOG_POSTS.some((p) => p.slug === slug);
-        if (exists) {
-          setSelectedPostSlug(slug);
+        const rawSlug = hash.replace('#blog/', '');
+        const post = getBlogPostBySlug(rawSlug);
+        if (post) {
+          setSelectedPostSlug(post.slug);
           setCurrentView('blogDetail');
         }
       } else if (hash === '#blog') {
@@ -196,8 +201,8 @@ export default function App() {
 
   // Synchronize SEO Meta Tags, Document Title, and GA4 Analytics on view transition
   useEffect(() => {
-    let title = 'Calcora | 256 Free Online Calculators & Converter Tools';
-    let description = 'Calcora provides 256 verified free online calculators for finance, mortgage, health, algebra, physics, unit conversions, and construction with instant client-side math.';
+    let title = 'Calcora | 154 Free Online Calculators & Converter Tools';
+    let description = 'Calcora provides 154 verified free online calculators for finance, mortgage, health, algebra, physics, unit conversions, and construction with instant client-side math.';
     let path = '/';
     let calcId: string | undefined;
     let catId: string | undefined;
@@ -205,11 +210,24 @@ export default function App() {
 
     if (currentView === 'home') {
       path = '/';
+    } else if (currentView === 'calculators') {
+      title = 'All Free Online Calculators & Converter Tools Directory | Calcora';
+      description = 'Search, filter, and explore all 154 free verified online calculators for finance, mortgage, health, math, construction, and engineering.';
+      path = '/#calculators';
+      window.location.hash = '#calculators';
     } else if (currentView === 'calculator') {
       const calc = CALCULATORS.find((c) => c.id === selectedCalculatorId);
       if (calc) {
-        title = `${calc.title} | Calcora`;
-        description = calc.description || calc.shortDescription;
+        const hasToolSuffix = /calculator|converter|estimator|solver|generator|tool|schedule/i.test(calc.title);
+        title = hasToolSuffix
+          ? `${calc.title} (Free & Instant Online) | Calcora`
+          : `${calc.title} Calculator — Free & Instant Online Tool | Calcora`;
+        
+        const baseDesc = calc.description || calc.shortDescription;
+        description = baseDesc.endsWith('.') 
+          ? `${baseDesc} Calculate instantly with verified formulas, step-by-step instructions, and exportable results.`
+          : `${baseDesc}. Calculate instantly with verified formulas, step-by-step instructions, and exportable results.`;
+        
         path = `/#calculator/${calc.id}`;
         calcId = calc.id;
         window.location.hash = `#calculator/${calc.id}`;
@@ -218,22 +236,27 @@ export default function App() {
     } else if (currentView === 'category') {
       const cat = CATEGORIES.find((c) => c.id === selectedCategoryId);
       if (cat) {
-        title = `${cat.name} Calculators & Tools | Calcora`;
-        description = cat.description;
+        title = `${cat.name} Calculators — Free Interactive Math & Planning Tools | Calcora`;
+        const baseDesc = cat.description;
+        description = baseDesc.endsWith('.')
+          ? `${baseDesc} Explore verified tools with instant zero-latency math, formula guides, and domain FAQs.`
+          : `${baseDesc}. Explore verified tools with instant zero-latency math, formula guides, and domain FAQs.`;
         path = `/#category/${cat.id}`;
         catId = cat.id;
         window.location.hash = `#category/${cat.id}`;
       }
     } else if (currentView === 'blog') {
-      title = 'Calcora Blog | Financial Insights, Math Tutorials & Guides';
-      description = 'Read in-depth financial analyses, mortgage tips, health guides, and mathematical explanations from Calcora engineering team.';
+      title = 'Calcora Blog & Research: Financial Guides, Science & Math Tutorials';
+      description = 'Read in-depth financial analyses, mortgage amortization tips, health guides, and mathematical explanations from Calcora engineering team.';
       path = '/#blog';
       window.location.hash = '#blog';
     } else if (currentView === 'blogDetail') {
-      const post = BLOG_POSTS.find((p) => p.slug === selectedPostSlug);
+      const post = getBlogPostBySlug(selectedPostSlug);
       if (post) {
-        title = `${post.title} | Calcora Blog`;
-        description = post.excerpt;
+        title = `${post.title} | Calcora Guide`;
+        description = post.excerpt.endsWith('.')
+          ? `${post.excerpt} Read the comprehensive guide with mathematical formulas and practical examples on Calcora.`
+          : `${post.excerpt}. Read the comprehensive guide with mathematical formulas and practical examples on Calcora.`;
         path = `/#blog/${post.slug}`;
         postSlug = post.slug;
         window.location.hash = `#blog/${post.slug}`;
@@ -245,7 +268,7 @@ export default function App() {
       window.location.hash = '#for-sale';
       trackAcquisitionEvent('for_sale_page_view', { source: 'route_view' });
     } else {
-      title = `${currentView.charAt(0).toUpperCase() + currentView.slice(1)} | Calcora`;
+      title = `${currentView.charAt(0).toUpperCase() + currentView.slice(1)} | Calcora Free Online Tools`;
       path = `/#${currentView}`;
       window.location.hash = `#${currentView}`;
     }
@@ -328,10 +351,11 @@ export default function App() {
   }, [selectedPostSlug]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans antialiased selection:bg-teal-500 selection:text-white">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans antialiased selection:bg-indigo-500 selection:text-white">
       {/* Header Navbar */}
       <Navbar
         onNavigateHome={handleNavigateHome}
+        onNavigateCalculators={() => { setCurrentView('calculators'); window.scrollTo(0, 0); }}
         onNavigateCategory={handleSelectCategory}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenDrawer={handleOpenDrawer}
@@ -356,9 +380,27 @@ export default function App() {
             onToggleFavorite={handleToggleFavorite}
             onSelectCalculator={handleSelectCalculator}
             onSelectCategory={handleSelectCategory}
+            onNavigateCalculators={() => { setCurrentView('calculators'); window.scrollTo(0, 0); }}
             onOpenSearch={() => setIsSearchOpen(true)}
             onNavigateBlog={() => { setCurrentView('blog'); window.scrollTo(0, 0); }}
+            onSelectPost={(postSlug) => {
+              setSelectedPostSlug(postSlug);
+              setCurrentView('blogDetail');
+              window.scrollTo(0, 0);
+            }}
             totalCalculationsCount={totalCalculationsCount}
+          />
+        )}
+
+        {currentView === 'calculators' && (
+          <CalculatorsDirectoryView
+            calculators={CALCULATORS}
+            categories={CATEGORIES}
+            favorites={favorites}
+            onToggleFavorite={handleToggleFavorite}
+            onSelectCalculator={handleSelectCalculator}
+            onSelectCategory={handleSelectCategory}
+            onNavigateHome={handleNavigateHome}
           />
         )}
 
@@ -441,6 +483,7 @@ export default function App() {
       {/* Footer */}
       <Footer
         onNavigateHome={handleNavigateHome}
+        onNavigateCalculators={() => { setCurrentView('calculators'); window.scrollTo(0, 0); }}
         onNavigateCategory={handleSelectCategory}
         onSelectCalculator={handleSelectCalculator}
         onNavigateAbout={() => { setCurrentView('about'); window.scrollTo(0, 0); }}

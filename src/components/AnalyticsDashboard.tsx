@@ -19,7 +19,7 @@ import { getAnalyticsStats, AnalyticsStats } from '../lib/analytics';
 import { CALCULATORS } from '../data/calculatorsList';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export const AnalyticsDashboard: React.FC<{ onNavigateHome: () => void }> = ({ onNavigateHome }) => {
+export const AnalyticsDashboard: React.FC<{ onNavigateHome: () => void; onSelectCalculator?: (id: string) => void }> = ({ onNavigateHome, onSelectCalculator }) => {
   const { t } = useLanguage();
   const [stats] = useState<AnalyticsStats>(() => getAnalyticsStats());
 
@@ -37,6 +37,19 @@ export const AnalyticsDashboard: React.FC<{ onNavigateHome: () => void }> = ({ o
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 animate-in fade-in duration-200">
       
+      {/* Demo Telemetry Disclaimer Banner */}
+      <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 flex items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2">
+          <ShieldCheck className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+          <span>
+            <strong>Demo Data & Local Telemetry Notice:</strong> These metrics reflect client-side simulation and local browser event stream modeling. Connect your GA4 Measurement ID for production tracking.
+          </span>
+        </div>
+        <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">
+          Simulation Mode
+        </span>
+      </div>
+
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs">
         <div>
@@ -61,8 +74,8 @@ export const AnalyticsDashboard: React.FC<{ onNavigateHome: () => void }> = ({ o
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 text-xs font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" /> Live Tracking Active
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800 text-xs font-bold">
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" /> Local Demo Stream
           </span>
         </div>
       </div>
@@ -139,7 +152,11 @@ export const AnalyticsDashboard: React.FC<{ onNavigateHome: () => void }> = ({ o
               const percentage = Math.round((count / maxCalcCount) * 100);
 
               return (
-                <div key={calcId} className="space-y-1">
+                <div
+                  key={calcId}
+                  onClick={() => onSelectCalculator?.(calcId)}
+                  className={`space-y-1 ${onSelectCalculator ? 'cursor-pointer hover:opacity-80 transition' : ''}`}
+                >
                   <div className="flex justify-between text-xs font-bold text-slate-800 dark:text-slate-200">
                     <span>{title}</span>
                     <span className="font-mono text-teal-600 dark:text-teal-400">{count.toLocaleString()} runs</span>

@@ -1,20 +1,24 @@
 {
-  "name": "Nexus AI Sales OS | Enterprise Autonomous Sales & Asset Valuation",
-  "short_name": "Nexus AI OS",
+  "name": "Calcora | Free Online Calculators & Converter Tools",
+  "short_name": "Calcora",
+  "description": "Calcora provides 256 verified free online calculators for finance, mortgage, health, algebra, physics, unit conversions, and construction.",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
       "src": "/apple-touch-icon.svg",
       "sizes": "180x180",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#0f172a",
+  "theme_color": "#0d9488",
   "background_color": "#0f172a",
   "display": "standalone",
-  "start_url": "/"
+  "start_url": "/",
+  "scope": "/"
 }

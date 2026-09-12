@@ -2,13 +2,14 @@
  * Calcora SEO & Structured Data (JSON-LD) Utilities
  */
 import { CalculatorMeta } from '../types';
+import { GOOGLE_CONFIG } from '../config/google';
 
 /**
  * Generates JSON-LD schema for a calculator tool (SoftwareApplication / WebApplication).
  */
 export function generateCalculatorSchema(calc: CalculatorMeta) {
-  const domain = typeof window !== 'undefined' ? window.location.origin : 'https://calcora.com';
-  const url = `${domain}/#calculator/${calc.id}`;
+  const domain = (typeof window !== 'undefined' && window.location.origin) ? window.location.origin : GOOGLE_CONFIG.siteUrl;
+  const url = `${domain.replace(/\/$/, '')}/#calculator/${calc.id}`;
 
   const schema: Record<string, any> = {
     '@context': 'https://schema.org',

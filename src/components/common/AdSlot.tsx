@@ -1,20 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Megaphone } from 'lucide-react';
+import { GOOGLE_CONFIG } from '../../config/google';
 
 interface AdSlotProps {
   slotId?: string;
-  format?: 'horizontal' | 'rectangle' | 'responsive';
+  format?: 'horizontal' | 'rectangle' | 'responsive' | 'auto';
   className?: string;
 }
 
 export const AdSlot: React.FC<AdSlotProps> = ({
   slotId = 'calcora-responsive-banner',
-  format = 'responsive',
+  format = 'auto',
   className = '',
 }) => {
-  // Configurable Monetization Slot
-  // When an ad script (e.g., Google AdSense) is active, this component hosts the ad unit.
-  // In development/clean mode, it renders a sleek, non-intrusive sponsor zone frame.
+  const clientId = GOOGLE_CONFIG.adsenseClientId
+    ? (GOOGLE_CONFIG.adsenseClientId.startsWith('ca-')
+        ? GOOGLE_CONFIG.adsenseClientId
+        : `ca-${GOOGLE_CONFIG.adsenseClientId}`)
+    : '';
+
+  useEffect(() => {
+    if (clientId && typeof window !== 'undefined') {
+      try {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      } catch {
+        // Safe fallback if blocked by ad-blocker or script still initializing
+      }
+    }
+  }, [clientId]);
+
+  if (clientId) {
+    return (
+      <aside
+        aria-label="Advertisement"
+        className={`my-6 overflow-hidden text-center ${className}`}
+      >
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client={clientId}
+          data-ad-slot={slotId}
+          data-ad-format={format}
+          data-full-width-responsive="true"
+        />
+      </aside>
+    );
+  }
+
+  // Configurable Sponsor Slot (Rendered when AdSense is not configured)
   return (
     <aside
       aria-label="Sponsor & Partner Resources"

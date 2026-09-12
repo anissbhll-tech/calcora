@@ -9,6 +9,7 @@ interface FooterProps {
   onNavigateHome: () => void;
   onNavigateCategory: (categoryId: CategoryId) => void;
   onSelectCalculator: (calculatorId: string) => void;
+  onNavigateCalculators?: () => void;
   onNavigateAbout?: () => void;
   onNavigateContact?: () => void;
   onNavigatePrivacy?: () => void;
@@ -24,6 +25,7 @@ export const Footer: React.FC<FooterProps> = ({
   onNavigateHome,
   onNavigateCategory,
   onSelectCalculator,
+  onNavigateCalculators,
   onNavigateAbout,
   onNavigateContact,
   onNavigatePrivacy,
@@ -43,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Core Value Highlights - Bento Style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-12 border-b border-slate-800">
           <div className="p-5 rounded-2xl bg-slate-800/60 border border-slate-800 flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-teal-500/10 text-teal-400 border border-teal-500/20 shrink-0">
+            <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shrink-0">
               <Zap className="w-5 h-5" />
             </div>
             <div>
@@ -85,14 +87,25 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand Info */}
           <div className="col-span-2 space-y-4">
             <div className="flex items-center gap-2.5 cursor-pointer" onClick={onNavigateHome}>
-              <div className="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center font-black text-xl shadow-xs">
+              <div className="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-xl shadow-xs">
                 C
               </div>
               <span className="text-xl font-bold text-white tracking-tight">{t('app_title', 'Calcora')}</span>
             </div>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Calcora is a modern online calculation suite housing specialized tools for finance, fitness, mathematics, algebra, and construction planning.
+              Calcora is a high-performance online calculation suite housing 154 verified calculation tools, 21 domain category hubs, and instant client-side math execution.
             </p>
+            {onNavigateCalculators && (
+              <div>
+                <button
+                  type="button"
+                  onClick={onNavigateCalculators}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/20 text-xs font-semibold transition"
+                >
+                  <span>Explore Directory (154 Tools) →</span>
+                </button>
+              </div>
+            )}
             <div className="flex items-center gap-3 pt-2">
               <LanguageSwitcher />
             </div>
@@ -106,49 +119,59 @@ export const Footer: React.FC<FooterProps> = ({
             <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">Finance & Loans</h5>
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <button onClick={() => onSelectCalculator('mortgage')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('mortgage')} className="hover:text-indigo-400 transition">
                   Mortgage Amortization
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCalculator('compound-interest')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('compound-interest')} className="hover:text-indigo-400 transition">
                   Compound Interest
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCalculator('auto-loan')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('auto-loan')} className="hover:text-indigo-400 transition">
                   Auto Financing
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCalculator('rental-property-roi')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('rental-property-roi')} className="hover:text-indigo-400 transition">
                   Rental ROI & Cap Rate
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigateCategory('finance')} className="hover:text-indigo-400 text-indigo-300/80 transition">
+                  All Finance Calculators →
                 </button>
               </li>
             </ul>
           </div>
 
           <div>
-            <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">Health & Fitness</h5>
+            <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">Health & Science</h5>
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <button onClick={() => onSelectCalculator('bmi')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('bmi')} className="hover:text-indigo-400 transition">
                   BMI Index
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCalculator('calorie-tdee')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('calorie-tdee')} className="hover:text-indigo-400 transition">
                   Calorie & TDEE
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCalculator('body-fat')} className="hover:text-teal-400 transition">
+                <button onClick={() => onSelectCalculator('body-fat')} className="hover:text-indigo-400 transition">
                   US Navy Body Fat %
                 </button>
               </li>
               <li>
-                <button onClick={() => onSelectCalculator('target-heart-rate')} className="hover:text-teal-400 transition">
-                  Target Heart Rate
+                <button onClick={() => onSelectCalculator('unit-converter')} className="hover:text-indigo-400 transition">
+                  Unit Conversions
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigateCategory('health')} className="hover:text-indigo-400 text-indigo-300/80 transition">
+                  All Health Calculators →
                 </button>
               </li>
             </ul>
@@ -159,14 +182,14 @@ export const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2.5 text-xs text-slate-400">
               {onNavigateBlog && (
                 <li>
-                  <button onClick={onNavigateBlog} className="hover:text-teal-400 transition font-semibold text-teal-300">
+                  <button onClick={onNavigateBlog} className="hover:text-indigo-400 transition font-semibold text-indigo-300">
                     {t('blog_guides', 'Guides & Blog')}
                   </button>
                 </li>
               )}
               {onNavigateAnalytics && (
                 <li>
-                  <button onClick={onNavigateAnalytics} className="hover:text-teal-400 transition font-semibold text-teal-400 flex items-center gap-1">
+                  <button onClick={onNavigateAnalytics} className="hover:text-indigo-400 transition font-semibold text-indigo-400 flex items-center gap-1">
                     <BarChart3 className="w-3.5 h-3.5" />
                     <span>{t('analytics', 'Analytics Dashboard')}</span>
                   </button>
@@ -174,42 +197,42 @@ export const Footer: React.FC<FooterProps> = ({
               )}
               {onNavigateAbout && (
                 <li>
-                  <button onClick={onNavigateAbout} className="hover:text-teal-400 transition">
+                  <button onClick={onNavigateAbout} className="hover:text-indigo-400 transition">
                     {t('about', 'About Calcora')}
                   </button>
                 </li>
               )}
               {onNavigateContact && (
                 <li>
-                  <button onClick={onNavigateContact} className="hover:text-teal-400 transition">
+                  <button onClick={onNavigateContact} className="hover:text-indigo-400 transition">
                     {t('contact', 'Contact & Support')}
                   </button>
                 </li>
               )}
               {onNavigatePrivacy && (
                 <li>
-                  <button onClick={onNavigatePrivacy} className="hover:text-teal-400 transition">
+                  <button onClick={onNavigatePrivacy} className="hover:text-indigo-400 transition">
                     {t('privacy_policy', 'Privacy Policy')}
                   </button>
                 </li>
               )}
               {onNavigateTerms && (
                 <li>
-                  <button onClick={onNavigateTerms} className="hover:text-teal-400 transition">
+                  <button onClick={onNavigateTerms} className="hover:text-indigo-400 transition">
                     {t('terms_of_use', 'Terms of Use')}
                   </button>
                 </li>
               )}
               {onNavigateCookie && (
                 <li>
-                  <button onClick={onNavigateCookie} className="hover:text-teal-400 transition">
+                  <button onClick={onNavigateCookie} className="hover:text-indigo-400 transition">
                     {t('cookie_policy', 'Cookie Policy')}
                   </button>
                 </li>
               )}
               {onNavigateDisclaimer && (
                 <li>
-                  <button onClick={onNavigateDisclaimer} className="hover:text-teal-400 transition">
+                  <button onClick={onNavigateDisclaimer} className="hover:text-indigo-400 transition">
                     {t('disclaimer', 'Disclaimer')}
                   </button>
                 </li>
@@ -227,17 +250,36 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
+        {/* Complete 21 Domain Category Index Hub Grid */}
+        <div className="py-8 border-t border-slate-800/80">
+          <h5 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4">
+            Browse All 21 Calculation Categories
+          </h5>
+          <div className="flex flex-wrap gap-2">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => onNavigateCategory(cat.id)}
+                className="px-2.5 py-1.5 rounded-lg bg-slate-800/70 hover:bg-indigo-950/60 border border-slate-700/60 hover:border-indigo-500/40 text-slate-300 hover:text-indigo-300 text-xs transition flex items-center gap-1.5"
+              >
+                <span>{cat.name}</span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-700/80 text-slate-400">{cat.count}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>Disclaimer: Calcora calculators are for educational and planning purposes only.</p>
           <div className="flex items-center gap-4 text-slate-400">
             {onNavigatePrivacy && (
-              <button onClick={onNavigatePrivacy} className="hover:text-teal-400 transition">Privacy</button>
+              <button onClick={onNavigatePrivacy} className="hover:text-indigo-400 transition">Privacy</button>
             )}
             {onNavigateTerms && (
-              <button onClick={onNavigateTerms} className="hover:text-teal-400 transition">Terms</button>
+              <button onClick={onNavigateTerms} className="hover:text-indigo-400 transition">Terms</button>
             )}
             {onNavigateDisclaimer && (
-              <button onClick={onNavigateDisclaimer} className="hover:text-teal-400 transition">Disclaimer</button>
+              <button onClick={onNavigateDisclaimer} className="hover:text-indigo-400 transition">Disclaimer</button>
             )}
           </div>
         </div>

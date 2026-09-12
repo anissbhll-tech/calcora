@@ -1,6 +1,6 @@
 {
   "name": "Calcora",
-  "description": "Calcora - 256 Free Online Calculators for Finance, Health, Math, Construction & Unit Conversions.",
+  "description": "Calcora - 154 Free Online Calculators for Finance, Health, Math, Construction & Unit Conversions.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

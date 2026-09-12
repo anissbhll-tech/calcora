@@ -88,7 +88,7 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
     },
     {
       q: 'How many calculators are included?',
-      a: 'The current platform contains 256+ interactive calculators.',
+      a: 'The current platform contains 154+ interactive calculators.',
     },
     {
       q: 'Can the platform be expanded?',
@@ -146,13 +146,13 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
           </h1>
 
           <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal max-w-3xl">
-            Own a production-ready calculator platform with 256+ interactive tools, multilingual SEO infrastructure, analytics integration, and significant room for growth.
+            Own a production-ready calculator platform with 154+ interactive tools, multilingual SEO infrastructure, analytics integration, and significant room for growth.
           </p>
 
           {/* Badges */}
           <div className="flex flex-wrap gap-2.5 pt-2">
             {[
-              '256+ Calculators',
+              '154+ Calculators',
               'SEO Ready',
               'Production Deployed',
               '7 Languages',
@@ -218,7 +218,7 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-800">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block uppercase">Calculators</span>
-              <span className="text-lg font-bold text-slate-900 dark:text-white mt-1 block">256+ Tools</span>
+              <span className="text-lg font-bold text-slate-900 dark:text-white mt-1 block">154+ Tools</span>
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-800">
@@ -273,7 +273,7 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
           {[
             {
               title: '1. Large Existing Calculator Library',
-              desc: '256+ interactive calculators across finance, mortgage, health, algebra, physics, unit conversions, and construction.',
+              desc: '154+ interactive calculators across finance, mortgage, health, algebra, physics, unit conversions, and construction.',
               icon: Calculator,
               color: 'text-teal-500 bg-teal-500/10 border-teal-500/20',
             },
@@ -409,7 +409,7 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { title: 'Google AdSense', desc: 'Potential display advertising across 256+ high-intent tool pages.' },
+            { title: 'Google AdSense', desc: 'Potential display advertising across 154+ high-intent tool pages.' },
             { title: 'Affiliate Marketing', desc: 'Potential referral links for mortgage lenders, brokers, & finance products.' },
             { title: 'Premium Calculators', desc: 'Potential gated PDF exports, detailed schedules, or pro features.' },
             { title: 'Calculator API', desc: 'Potential B2B API access for developers, Fintechs, and real estate portals.' },
@@ -474,7 +474,7 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             '✓ Complete React + TypeScript Source Code',
-            '✓ 256+ Interactive Calculator Components',
+            '✓ 154+ Interactive Calculator Components',
             '✓ Custom UI Component Library',
             '✓ Structured Calculator Data & Definitions',
             '✓ Full SEO & Head Metadata System',
@@ -548,7 +548,7 @@ export const ForSalePage: React.FC<ForSalePageProps> = ({ onNavigateHome, onNavi
             { title: 'Content Publishers', desc: 'Enhance media publications with interactive utilities.' },
             { title: 'Software Developers', desc: 'Acquire clean React code to launch customized commercial tools.' },
             { title: 'Digital Agencies', desc: 'Provide client lead-generation or white-label tools.' },
-            { title: 'Ad-Tech Operators', desc: 'Deploy ad units across 256+ utility tools.' },
+            { title: 'Ad-Tech Operators', desc: 'Deploy ad units across 154+ utility tools.' },
             { title: 'Calculator Networks', desc: 'Expand existing portal portfolio with a ready asset.' },
           ].map((profile) => (
             <div key={profile.title} className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">

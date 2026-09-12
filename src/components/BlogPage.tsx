@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, Search, Clock, Calendar, Tag, ArrowRight, Sparkles, User } from 'lucide-react';
+import { BookOpen, Search, Clock, Calendar, ArrowRight, User, Calculator, Sigma } from 'lucide-react';
 import { BLOG_POSTS, BlogPost } from '../data/blogPosts';
 import { Breadcrumbs } from './Breadcrumbs';
 
@@ -17,7 +17,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const categories = ['All', 'Finance', 'Health'];
+  const uniqueCategories = ['All', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category)))];
 
   const filteredPosts = BLOG_POSTS.filter((post) => {
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
@@ -38,13 +38,13 @@ export const BlogPage: React.FC<BlogPageProps> = ({
         <div className="relative z-10 max-w-2xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-semibold">
             <BookOpen className="w-4 h-4 text-teal-400" />
-            <span>Calcora Knowledge & Guides</span>
+            <span>Educational Knowledge Center</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Financial & Health <span className="text-teal-400">Calculation Guides</span>
+            Financial, Health & Engineering <span className="text-teal-400">Calculation Guides</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-            In-depth articles explaining the mathematics, clinical benchmarks, and practical strategies behind daily formulas.
+            In-depth guides explaining the mathematics, formulas, and practical decision frameworks behind essential calculators.
           </p>
         </div>
       </header>
@@ -55,7 +55,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search articles, tags, formulas..."
+            placeholder="Search guides, formulas, keywords..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
@@ -63,14 +63,15 @@ export const BlogPage: React.FC<BlogPageProps> = ({
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
-          {categories.map((cat) => (
+          {uniqueCategories.map((cat) => (
             <button
               key={cat}
+              type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition border ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition border ${
                 selectedCategory === cat
                   ? 'bg-teal-600 text-white border-teal-600'
-                  : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100'
+                  : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-750'
               }`}
             >
               {cat}
@@ -83,7 +84,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
       {filteredPosts.length === 0 ? (
         <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
           <BookOpen className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-          <h3 className="text-base font-bold text-slate-800 dark:text-white">No articles found</h3>
+          <h3 className="text-base font-bold text-slate-800 dark:text-white">No educational guides found</h3>
           <p className="text-xs text-slate-500 mt-1">Try adjusting your search query or topic category.</p>
         </div>
       ) : (
@@ -118,20 +119,36 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
                   {post.excerpt}
                 </p>
+
+                {post.formulaHighlight && (
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-800 space-y-1">
+                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-teal-600 dark:text-teal-400 uppercase">
+                      <Sigma className="w-3 h-3" />
+                      <span>{post.formulaHighlight.name}</span>
+                    </div>
+                    <div className="font-mono text-[11px] font-semibold text-slate-800 dark:text-teal-300 truncate">
+                      {post.formulaHighlight.formula}
+                    </div>
+                  </div>
+                )}
               </div>
 
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
-                  <User className="w-3 h-3 text-teal-600" />
-                  <span>{post.author}</span>
-                </div>
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => onSelectCalculator(post.primaryCalculatorId)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900 text-xs font-bold transition"
+                >
+                  <Calculator className="w-3.5 h-3.5" />
+                  <span>Launch Tool</span>
+                </button>
 
                 <button
                   type="button"
                   onClick={() => onSelectPost(post.slug)}
-                  className="flex items-center gap-1 text-xs font-bold text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform"
+                  className="flex items-center gap-1 text-xs font-bold text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform self-end sm:self-auto"
                 >
-                  <span>Read Article</span>
+                  <span>Read Guide</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -142,3 +159,4 @@ export const BlogPage: React.FC<BlogPageProps> = ({
     </div>
   );
 };
+
